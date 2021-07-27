@@ -55,7 +55,7 @@
                             onclick="return confirm('Are you sure ?')"><i
                                 class="fas fa-step-forward float-right btn btn-danger btn-sm"></i></a>
                         {% endif %}
-                        <a href="" class="mr-3" data-toggle="tooltip" data-placement="top" title="Edit Poll"><i
+                        <a href="{% url 'edit' poll.id %}" class="mr-3" data-toggle="tooltip" data-placement="top" title="Edit Poll"><i
                                 class="fas fa-pencil-alt float-right btn btn-primary btn-sm mr-1"></i></a>
                         {% endif %}
                     </li>

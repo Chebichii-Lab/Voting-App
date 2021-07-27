@@ -14,6 +14,7 @@ urlpatterns=[
     url('profile/', views.user_profile, name='profile'),
     path('list/', views.polls_list, name='list'),
     path('add/', views.polls_add, name='add'),
+    path('edit/<int:poll_id>/', views.polls_edit, name='edit'),
 ]
 
 if settings.DEBUG:
