@@ -107,7 +107,7 @@
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="">Polls</a>
+                <a class="nav-link" href="{% url 'list' %}">Polls</a>
             </li>
             {% endif %}
         </ul>

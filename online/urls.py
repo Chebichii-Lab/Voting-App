@@ -12,7 +12,7 @@ urlpatterns=[
     url('login/', auth_views.LoginView.as_view(), name='login'),
     url('logout/',auth_views.LogoutView.as_view(), name='logout'),
     url('profile/', views.user_profile, name='profile'),
-    
+    path('list/', views.polls_list, name='list'),
 ]
 
 if settings.DEBUG:
