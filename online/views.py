@@ -1,8 +1,7 @@
 from online.models import Choice, Poll
-from online.forms import AddPollForm, SignupForm, UserProfileForm
-from django.shortcuts import render
+from online.forms import AddPollForm, EditPollForm, SignupForm, UserProfileForm
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate
-from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count
@@ -73,19 +72,14 @@ def polls_list(request):
 
 @login_required()
 def polls_add(request):
-    # if request.user('polls.add_poll'):
         if request.method == 'POST':
             form = AddPollForm(request.POST)
             if form.is_valid:
                 poll = form.save(commit=False)
                 poll.owner = request.user
                 poll.save()
-                # new_choice1 = Choice(poll=poll, choice_text=form.cleaned_data['choice1']).save()
-                # new_choice2 = Choice(poll=poll, choice_text=form.cleaned_data['choice2']).save()
-
                 messages.success(
                     request, "Poll & Choices added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
-
                 return redirect('list')
         else:
             form = AddPollForm()
@@ -93,5 +87,20 @@ def polls_add(request):
             'form': form,
         }
         return render(request, 'add_poll.html', context)
-    # else:
-    #     return HttpResponse("Sorry but you don't have permission to do that!")
+
+@login_required
+def polls_edit(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = EditPollForm(request.POST, instance=poll)
+        if form.is_valid:
+            form.save()
+            messages.success(request, "Poll Updated successfully.",
+                             extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect("polls:list")
+    else:
+        form = EditPollForm(instance=poll)
+    return render(request, "edit_poll.html", {'form': form, 'poll': poll})
