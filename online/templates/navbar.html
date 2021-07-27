@@ -100,7 +100,7 @@
     <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class=" nav navbar-nav">
             <li class="nav-item ">
-                <a class="nav-link" href="" style="color:white; font-family: 'Special Elite', cursive;">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/" style="color:white; font-family: 'Special Elite', cursive;">Home <span class="sr-only">(current)</span></a>
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item">
@@ -112,7 +112,7 @@
             {% if request.user.is_authenticated %}
             <li><a class="nav-link" href="profile/" style="color: white; font-family: 'Special Elite', cursive;">Profile</a></li>
             <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">My Polls</a>
-            <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Logout</a>
+            <a class="nav-link" href="logout/" style="color: white; font-family: 'Special Elite', cursive;">Logout</a>
             {% else %}
             <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Login</a>
             <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Register</a>
