@@ -30,21 +30,11 @@
                 </div>
                 <hr>
                 <div class="media-body">
-                    <h2 style="font-family: 'Satisfy', cursive; color: white; font-size: 40px;">{{user.username}}</h2>
-                    <p style="font-family: 'Satisfy', cursive; color: white; font-size: 30px;">{{user.email}}</p>
+                    <h2 style="font-family: 'Satisfy', cursive; color: black; font-size: 40px;">{{user.username}}</h2>
+                    <p style="font-family: 'Satisfy', cursive; color: black; font-size: 30px;">{{user.email}}</p>
                     <p>{{user.profile.bio}}</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p style="font-family: 'Satisfy', cursive; color: white; font-size: 25px;">Following</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p style="font-family: 'Satisfy', cursive; color: white; font-size: 25px;">Followers</p>
-                        </div>
-                        <br>
-
-                    </div>
                     <hr>
-                    <a href="{%url 'change_profile'%}">
+                    <a href="">
                         <button class="btn btn-success">Edit Profile</button>
                     </a>
 
