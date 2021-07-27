@@ -1,11 +1,13 @@
-from online.models import Poll
-from online.forms import SignupForm, UserProfileForm
+from online.models import Choice, Poll
+from online.forms import AddPollForm, SignupForm, UserProfileForm
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count
+from django.contrib import messages
+from django.http import HttpResponse
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -68,3 +70,28 @@ def polls_list(request):
         'search_term': search_term,
     }
     return render(request, 'poll_list.html', context)
+
+@login_required()
+def polls_add(request):
+    # if request.user('polls.add_poll'):
+        if request.method == 'POST':
+            form = AddPollForm(request.POST)
+            if form.is_valid:
+                poll = form.save(commit=False)
+                poll.owner = request.user
+                poll.save()
+                # new_choice1 = Choice(poll=poll, choice_text=form.cleaned_data['choice1']).save()
+                # new_choice2 = Choice(poll=poll, choice_text=form.cleaned_data['choice2']).save()
+
+                messages.success(
+                    request, "Poll & Choices added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+
+                return redirect('list')
+        else:
+            form = AddPollForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'add_poll.html', context)
+    # else:
+    #     return HttpResponse("Sorry but you don't have permission to do that!")

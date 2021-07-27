@@ -13,6 +13,7 @@ urlpatterns=[
     url('logout/',auth_views.LogoutView.as_view(), name='logout'),
     url('profile/', views.user_profile, name='profile'),
     path('list/', views.polls_list, name='list'),
+    path('add/', views.polls_add, name='add'),
 ]
 
 if settings.DEBUG:
