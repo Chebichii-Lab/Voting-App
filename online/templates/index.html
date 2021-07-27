@@ -1,1 +1,22 @@
-<h1>Your Vote Counts</h1>
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock custom_css %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="home-content">
+                <h1 style="text-align: center;">Choices - Get Started!</h1>
+                <h3 style="text-align: center;">Your Voice Matters!</h3>
+                <hr>
+                <a class="btn btn-primary btn-lg" href="" role="button" style="margin-left: 450px;">Get Started !</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

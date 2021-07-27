@@ -11,6 +11,8 @@ urlpatterns=[
     url('register/',views.signup, name='registration'),
     url('login/', auth_views.LoginView.as_view(), name='login'),
     url('logout/',auth_views.LogoutView.as_view(), name='logout'),
+    url('profile/', views.user_profile, name='profile'),
+    
 ]
 
 if settings.DEBUG:
