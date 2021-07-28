@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+
 def index(request):
     polls = Poll.objects.all()
     return render(request,'index.html', {'polls':polls})

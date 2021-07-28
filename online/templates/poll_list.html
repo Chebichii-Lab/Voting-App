@@ -40,7 +40,7 @@
                 <br>
                 <ul class="list-group list-group-horizontal-xxl">
                     {% for poll in polls %}
-                    <li class="list-group-item"><a href="{% url 'detail' poll.id %}" style="color: black; font-size: 25px;">{{ poll.description}}
+                    <li class="list-group-item"><a href="{% url 'detail' poll.id %}" style="color: black; font-size: 25px;">{{ poll.description |truncatewords:5}}
                             {% if not poll.active%}
                             <i class="fas fa-check-circle ml-2"></i>
                             {% endif %}
