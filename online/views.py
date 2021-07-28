@@ -1,5 +1,5 @@
 from online.models import Choice, Poll
-from online.forms import AddPollForm, EditPollForm, SignupForm, UserProfileForm
+from online.forms import AddChoiceForm, AddPollForm, EditPollForm, SignupForm, UserProfileForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -92,7 +92,7 @@ def polls_add(request):
 def polls_edit(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
     if request.user != poll.owner:
-        return redirect('home')
+        return redirect('index')
 
     if request.method == 'POST':
         form = EditPollForm(request.POST, instance=poll)
@@ -113,3 +113,23 @@ def polls_delete(request, poll_id):
     poll.delete()
     messages.success(request, "Poll Deleted successfully.",extra_tags='alert alert-success alert-dismissible fade show')
     return redirect("list")
+
+@login_required
+def add_choice(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('index')
+    if request.method == 'POST':
+        form = AddChoiceForm(request.POST)
+        if form.is_valid:
+            new_choice = form.save(commit=False)
+            new_choice.poll = poll
+            new_choice.save()
+            messages.success(request, "Choice added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('edit', poll_id)
+    else:
+        form = AddChoiceForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'add_choice.html', context)
