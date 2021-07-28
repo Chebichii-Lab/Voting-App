@@ -4,10 +4,6 @@ html, body {
     margin: 0;
     color: white;
   }
-html{
-    background-image: url('');
-    background-size: cover;
-}
 body {
     background: rgba(0, 0, 0, 0.466);
 }
@@ -15,3 +11,5 @@ body {
     text-align: center;
     padding-top: 20%;
 }
+
+
