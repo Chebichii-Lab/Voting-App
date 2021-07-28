@@ -96,7 +96,7 @@ def polls_edit(request, poll_id):
             form.save()
             messages.success(request, "Poll Updated successfully.",
                              extra_tags='alert alert-success alert-dismissible fade show')
-            return redirect("polls:list")
+            return redirect("list")
     else:
         form = EditPollForm(instance=poll)
     return render(request, "edit_poll.html", {'form': form, 'poll': poll})

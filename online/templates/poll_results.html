@@ -24,8 +24,7 @@
             <!-- progress bar -->
             <div class="progress mt-3 mb-2">
                 {% for choice in poll.get_result_dict %}
-                <div class="progress-bar bg-{{ choice.alert_class }}" role="progressbar"
-                    aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"><b>
+                <div class="progress-bar bg-{{ choice.alert_class }}" role="progressbar" style="width:{{ choice.percentage }}%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"><b>
                         {{choice.text|truncatewords:2}}-{{choice.percentage|floatformat}}%</b>
                 </div>
                 {% endfor %}
