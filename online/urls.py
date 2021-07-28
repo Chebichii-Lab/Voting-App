@@ -21,6 +21,7 @@ urlpatterns=[
     path('<int:poll_id>/vote/', views.poll_vote, name='vote'),
     path('<int:poll_id>/', views.poll_detail, name='detail'),
     path('end/<int:poll_id>/', views.endpoll, name='end_poll'),
+    path('list/user/', views.list_by_user, name='list_by_user'),
 ]
 
 if settings.DEBUG:

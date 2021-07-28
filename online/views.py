@@ -181,3 +181,15 @@ def endpoll(request, poll_id):
         return render(request, 'poll_results.html', {'poll': poll})
     else:
         return render(request, 'poll_results.html', {'poll': poll})
+
+@login_required()
+def list_by_user(request):
+    all_polls = Poll.objects.filter(owner=request.user)
+    paginator = Paginator(all_polls, 7)  
+    page = request.GET.get('page')
+    polls = paginator.get_page(page)
+
+    context = {
+        'polls': polls,
+    }
+    return render(request, 'poll_list.html', context)
