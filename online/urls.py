@@ -15,6 +15,7 @@ urlpatterns=[
     path('list/', views.polls_list, name='list'),
     path('add/', views.polls_add, name='add'),
     path('edit/<int:poll_id>/', views.polls_edit, name='edit'),
+    path('delete/<int:poll_id>/', views.polls_delete, name='delete_poll'),
 ]
 
 if settings.DEBUG:
