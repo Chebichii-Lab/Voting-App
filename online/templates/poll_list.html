@@ -44,7 +44,7 @@
 
                 <ul class="list-group">
                     {% for poll in polls %}
-                    <li class="list-group-item"><a href="">{{ poll.description|truncatewords:5 }}
+                    <li class="list-group-item"><a href="" style="color: black;">{{ poll.description}}
                             {% if not poll.active%}
                             <i class="fas fa-check-circle ml-2"></i>
                             {% endif %}
