@@ -25,7 +25,7 @@
                 </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">Update</button>
-                <a class="btn btn-warning" href="" role="button" style="margin-left: 100px;">Add Choice</a>
+                <a class="btn btn-warning" href="{% url 'add_choice' poll.id %}" role="button" style="margin-left: 100px;">Add Choice</a>
                 <a class="btn btn-danger" href="{% url 'delete_poll' poll.id %}" role="button" onclick="return confirm('Are you sure?')" style="margin-left: 130px;">Delete</a>
             </form>
             <div class="choices">
