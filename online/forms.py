@@ -1,4 +1,4 @@
-from online.models import Poll, Profile
+from online.models import Poll, Profile, Choice
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -33,3 +33,12 @@ class EditPollForm(forms.ModelForm):
         model = Poll
         fields = ['description']
         widgets = {'text': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'cols': 20}),}
+
+
+class AddChoiceForm(forms.ModelForm):
+    class Meta:
+        model = Choice
+        fields = ['choice_text', ]
+        widgets = {
+            'choice_text': forms.TextInput(attrs={'class': 'form-control', })
+        }
