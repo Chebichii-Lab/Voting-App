@@ -38,7 +38,7 @@
                 </form>
                 <br>
                 <br>
-                <ul class="list-group list-group-horizontal-xxl">
+                <ul class="list-group">
                     {% for poll in polls %}
                     <li class="list-group-item"><a href="{% url 'detail' poll.id %}" style="color: black; font-size: 25px;">{{ poll.description |truncatewords:5}}
                             {% if not poll.active%}
@@ -48,11 +48,10 @@
                         {% if request.user == poll.owner %}
                         {% if poll.active %}
                         <a href="{% url 'end_poll' poll.id %}" data-toggle="tooltip" data-placement="top" title="End Poll"
-                            onclick="return confirm('Are you sure ?')"><i
-                                class="fas fa-step-forward float-right btn btn-danger btn-sm"></i></a>
+                            onclick="return confirm('Are you sure ?')"><i class="fas fa-step-forward float-right btn btn-danger btn-md"></i></a>
                         {% endif %}
-                        <a href="{% url 'edit' poll.id %}" class="mr-3" data-toggle="tooltip" data-placement="top" title="Edit Poll"><i
-                                class="fas fa-pencil-alt float-right btn btn-primary btn-sm mr-1"></i></a>
+                        <a href="{% url 'edit' poll.id %}" class="mr-3" data-toggle="tooltip" data-placement="top"
+                            title="Edit Poll"><i class="fas fa-pencil-alt float-right btn btn-primary btn-md mr-1"></i></a>
                         {% endif %}
                     </li>
                     {% endfor %}
