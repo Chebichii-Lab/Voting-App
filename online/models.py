@@ -63,7 +63,7 @@ class Poll(models.Model):
         return results
 
     def __str__(self):
-        return self.text
+        return self.description
 
 # Model Class Choice
 class Choice(models.Model):
@@ -84,6 +84,6 @@ class Vote(models.Model):
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.poll.text[:15]} - {self.choice.choice_text[:15]} - {self.user.username}'
+        return f'{self.poll.description[:15]} - {self.choice.choice_text[:15]} - {self.user.username}'
 
 

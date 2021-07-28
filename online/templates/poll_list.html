@@ -25,7 +25,10 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                <form class="form-inline" style="margin-left: 200px; font-family: 'Special Elite', cursive;">
+                <a class="btn btn-primary mb-3 float-right" style="margin-left: 100px;" href="{% url 'add' %}" role="button" style="font-family: 'Special Elite', cursive;">Add <i
+                    class="fas fa-plus"></i></a>
+
+                <form class="form-inline" style="margin-right: 300px; font-family: 'Special Elite', cursive;">
                     <div class="form-group mr-sm-2 mb-2">
                         <input type="search" class="form-control" name="search" placeholder="Search"
                             value={{ search_term }}>
@@ -33,18 +36,10 @@
                     </div>
                 </form>
                 <br>
-                <a class="btn btn-{% if 'name' in request.GET %}warning{% else %}primary{% endif %} mb-3"
-                    href="?name=True" role="button" style="margin-right: 100px; font-family: 'Special Elite', cursive;">Name</a>
-                <a class="btn btn-{% if 'date' in request.GET %}warning{% else %}primary{% endif %} mb-3"
-                    href="?date=True" role="button" style="margin-right: 150px; font-family: 'Special Elite', cursive;">Date</a>
-                <a class="btn btn-{% if 'vote' in request.GET %}warning{% else %}primary{% endif %} mb-3"
-                    href="?vote=True" role="button" style="font-family: 'Special Elite', cursive;"> Vote</a>
-                <a class="btn btn-primary mb-3 float-right" href="{% url 'add' %}" role="button" style="font-family: 'Special Elite', cursive;">Add <i
-                        class="fas fa-plus"></i></a>
-
+                <br>
                 <ul class="list-group">
                     {% for poll in polls %}
-                    <li class="list-group-item"><a href="" style="color: black;">{{ poll.description}}
+                    <li class="list-group-item"><a href="{% url 'detail' poll.id %}" style="color: black;">{{ poll.description}}
                             {% if not poll.active%}
                             <i class="fas fa-check-circle ml-2"></i>
                             {% endif %}

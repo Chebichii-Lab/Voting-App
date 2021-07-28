@@ -1,4 +1,4 @@
-from online.models import Choice, Poll
+from online.models import Choice, Poll, Vote
 from online.forms import AddChoiceForm, AddPollForm, EditPollForm, SignupForm, UserProfileForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate
@@ -44,7 +44,7 @@ def polls_list(request):
     all_polls = Poll.objects.all()
     search_term = ''
     if 'name' in request.GET:
-        all_polls = all_polls.order_by('text')
+        all_polls = all_polls.order_by('description')
 
     if 'date' in request.GET:
         all_polls = all_polls.order_by('pub_date')
@@ -56,16 +56,12 @@ def polls_list(request):
         search_term = request.GET['search']
         all_polls = all_polls.filter(text__icontains=search_term)
 
-    paginator = Paginator(all_polls, 6)  # Show 6 contacts per page
+    paginator = Paginator(all_polls, 6)
     page = request.GET.get('page')
     polls = paginator.get_page(page)
-
     get_dict_copy = request.GET.copy()
-    # params = get_dict_copy.pop('page', True) and get_dict_copy.urlencode()
-    # print(params)
     context = {
         'polls': polls,
-        # 'params': params,
         'search_term': search_term,
     }
     return render(request, 'poll_list.html', context)
@@ -133,3 +129,43 @@ def add_choice(request, poll_id):
         'form': form,
     }
     return render(request, 'add_choice.html', context)
+
+@login_required
+def choice_delete(request, choice_id):
+    choice = get_object_or_404(Choice, pk=choice_id)
+    poll = get_object_or_404(Poll, pk=choice.poll.id)
+    if request.user != poll.owner:
+        return redirect('index')
+    choice.delete()
+    messages.success(request, "Choice Deleted successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+    return redirect('edit', poll.id)
+
+@login_required
+def poll_vote(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    choice_id = request.POST.get('choice')
+    if not poll.user_can_vote(request.user):
+        messages.error(request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
+        return redirect("list")
+
+    if choice_id:
+        choice = Choice.objects.get(id=choice_id)
+        vote = Vote(user=request.user, poll=poll, choice=choice)
+        vote.save()
+        print(vote)
+        return render(request, 'poll_results.html', {'poll': poll})
+    else:
+        messages.error(
+            request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
+        return redirect("detail", poll_id)
+
+def poll_detail(request, poll_id):
+    poll = get_object_or_404(Poll, id=poll_id)
+    if not poll.active:
+        return render(request, 'poll_result.html', {'poll': poll})
+    loop_count = poll.choice_set.count()
+    context = {
+        'poll': poll,
+        'loop_time': range(0, loop_count),
+    }
+    return render(request, 'poll_detail.html', context)
