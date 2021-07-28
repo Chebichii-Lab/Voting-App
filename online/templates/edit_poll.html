@@ -8,7 +8,7 @@
             {% if messages %}
             <div class="messages">
                 {% for message in messages %}
-                <div class="{{ message.tags }}" >{{ message }}
+                <div class="{{ message.tags }}">{{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -25,9 +25,13 @@
                 </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">Update</button>
-                <a class="btn btn-warning" href="{% url 'add_choice' poll.id %}" role="button" style="margin-left: 100px;">Add Choice</a>
-                <a class="btn btn-danger" href="{% url 'delete_poll' poll.id %}" role="button" onclick="return confirm('Are you sure?')" style="margin-left: 130px;">Delete</a>
+                <a class="btn btn-warning" href="{% url 'add_choice' poll.id %}" role="button"
+                    style="margin-left: 100px;">Add Choice</a>
+                <a class="btn btn-danger" href="{% url 'delete_poll' poll.id %}" role="button"
+                    onclick="return confirm('Are you sure?')" style="margin-left: 130px;">Delete</a>
             </form>
+        </div>
+        <div class="col-md-6">
             <div class="choices">
                 <h2 class="text-center mt-3">Choices</h2>
                 <hr>
@@ -38,8 +42,9 @@
                     {% endfor %}
                 </ul>
             </div>
-
         </div>
+
+
     </div>
 </div>
 {% endblock %}
