@@ -16,6 +16,7 @@ urlpatterns=[
     path('add/', views.polls_add, name='add'),
     path('edit/<int:poll_id>/', views.polls_edit, name='edit'),
     path('delete/<int:poll_id>/', views.polls_delete, name='delete_poll'),
+    path('edit/<int:poll_id>/choice/add/', views.add_choice, name='add_choice'),
 ]
 
 if settings.DEBUG:
