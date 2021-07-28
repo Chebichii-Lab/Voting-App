@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="row center">
-        <div class="col-md-6">
+        <div class="col-md-6 offset-md-3">
             <h2>Create new poll</h2>
             {% if messages %}
             <ul class="messages">
@@ -11,8 +11,10 @@
                 <li class="{{ message.tags }}">{{ message }}</li>
                 {% endfor %}
             </ul>
-            {% endif %}
-            <form action=""  style="color: black;" method="POST">
+        </div>
+        {% endif %}
+        <div class="col-md-6">
+            <form action="" style="color: black;" method="POST">
                 {% csrf_token %}
                 {% for field in form %}
                 <div class="form-group">
@@ -21,7 +23,7 @@
                 </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">Add Poll</button>
-                <a class="btn btn-warning" href="{% url 'list' %}" role="button">Back</a>
+                <a class="btn btn-success" href="{% url 'list' %}" role="button">Back</a>
             </form>
         </div>
     </div>
