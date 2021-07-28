@@ -169,3 +169,15 @@ def poll_detail(request, poll_id):
         'loop_time': range(0, loop_count),
     }
     return render(request, 'poll_detail.html', context)
+
+@login_required
+def endpoll(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('index')
+    if poll.active is True:
+        poll.active = False
+        poll.save()
+        return render(request, 'poll_results.html', {'poll': poll})
+    else:
+        return render(request, 'poll_results.html', {'poll': poll})

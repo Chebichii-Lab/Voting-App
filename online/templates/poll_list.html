@@ -28,6 +28,7 @@
                 <a class="btn btn-primary mb-3 float-right" style="margin-left: 100px;" href="{% url 'add' %}" role="button" style="font-family: 'Special Elite', cursive;">Add <i
                     class="fas fa-plus"></i></a>
 
+                    
                 <form class="form-inline" style="margin-right: 300px; font-family: 'Special Elite', cursive;">
                     <div class="form-group mr-sm-2 mb-2">
                         <input type="search" class="form-control" name="search" placeholder="Search"
@@ -37,16 +38,16 @@
                 </form>
                 <br>
                 <br>
-                <ul class="list-group">
+                <ul class="list-group list-group-horizontal-xxl">
                     {% for poll in polls %}
-                    <li class="list-group-item"><a href="{% url 'detail' poll.id %}" style="color: black;">{{ poll.description}}
+                    <li class="list-group-item"><a href="{% url 'detail' poll.id %}" style="color: black; font-size: 25px;">{{ poll.description}}
                             {% if not poll.active%}
                             <i class="fas fa-check-circle ml-2"></i>
                             {% endif %}
                         </a>
                         {% if request.user == poll.owner %}
                         {% if poll.active %}
-                        <a href="" data-toggle="tooltip" data-placement="top" title="End Poll"
+                        <a href="{% url 'end_poll' poll.id %}" data-toggle="tooltip" data-placement="top" title="End Poll"
                             onclick="return confirm('Are you sure ?')"><i
                                 class="fas fa-step-forward float-right btn btn-danger btn-sm"></i></a>
                         {% endif %}
@@ -72,6 +73,9 @@
                         {% endif %}
                     </ul>
                 </nav>
+                <a class=" mx-auto btn btn-md btn-success mx-auto" href="/">
+                    BACK HOME
+                </a>
             </div>
         </div>
     </div>

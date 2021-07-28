@@ -112,11 +112,10 @@
         <div class="navbar-nav ml-auto">
             {% if request.user.is_authenticated %}
             <li><a class="nav-link" href="profile/" style="color: white; font-family: 'Special Elite', cursive;">Profile</a></li>
-            <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">My Polls</a>
             <a class="nav-link" href="logout/" style="color: white; font-family: 'Special Elite', cursive;">Logout</a>
             {% else %}
-            <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Login</a>
-            <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Register</a>
+            <!-- <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Login</a>
+            <a class="nav-link" href="" style="color: white; font-family: 'Special Elite', cursive;">Register</a> -->
             {% endif %}
         </div>
     </div>
