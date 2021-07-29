@@ -30,12 +30,12 @@
                 </div>
                 <hr>
                 <div class="media-body">
-                    <h2 style="font-family: 'Satisfy', cursive; color: black; font-size: 40px;">{{user.username}}</h2>
-                    <p style="font-family: 'Satisfy', cursive; color: black; font-size: 30px;">{{user.email}}</p>
-                    <p>{{user.profile.bio}}</p>
+                    <h2 style="font-family: 'Special Elite', cursive; color: black; font-size: 40px;">{{user.username}}</h2>
+                    <p style="font-family: 'Special Elite', cursive; color: black; font-size: 30px;">{{user.email}}</p>
+                    <p style="font-family: 'Special Elite', cursive;">{{user.profile.bio}}</p>
                     <hr>
-                    <a href="">
-                        <button class="btn btn-success">Edit Profile</button>
+                    <a href="{% url 'list' %}">
+                        <button class="btn btn-success">Back to Polls</button>
                     </a>
 
                 </div>
