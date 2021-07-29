@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+import secrets
 
 # Create your models here.
 
@@ -41,27 +42,29 @@ class Poll(models.Model):
             return False
         return True
 
-    @classmethod
+    @property
     def get_vote_count(self):
         return self.vote_set.count()
 
+
     def get_result_dict(self):
-        results = []
+        res = []
         for choice in self.choice_set.all():
             d = {}
-            alert_class = ['primary', 'secondary', 'success', 'danger', 'dark', 'warning', 'info']
+            alert_class = ['primary', 'secondary', 'success',
+                           'danger', 'dark', 'warning', 'info']
 
-            # d['alert_class'] = secrets.choice(alert_class)
+            d['alert_class'] = secrets.choice(alert_class)
             d['text'] = choice.choice_text
             d['num_votes'] = choice.get_vote_count
             if not self.get_vote_count:
                 d['percentage'] = 0
             else:
-                d['percentage'] = (choice.get_vote_count / self.get_vote_count)*100
+                d['percentage'] = (choice.get_vote_count /
+                                   self.get_vote_count)*100
 
-            results.append(d)
-        return results
-
+            res.append(d)
+        return res
     def __str__(self):
         return self.description
 
@@ -71,9 +74,9 @@ class Choice(models.Model):
     choice_text = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.poll.text[:25]} - {self.choice_text[:25]}"
+        return f"{self.poll.description[:25]} - {self.choice_text[:25]}"
 
-    @classmethod
+    @property
     def get_vote_count(self):
         return self.vote_set.count()
 
